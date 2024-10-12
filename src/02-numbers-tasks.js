@@ -20,7 +20,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-  return width * height
+  return width * height;
 }
 
 
@@ -36,8 +36,8 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCircleCircumference(radius) {
-  return Math.PI * 2 * radius
-} 
+  return Math.PI * 2 * radius;
+}
 
 /**
  * Returns an average of two given numbers.
@@ -52,7 +52,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -71,7 +71,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
 /**
@@ -87,8 +87,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-  if (a === 0) return 0
-  return -(b / a)
+  if (a === 0) return 0;
+  return -(b / a);
 }
 
 
@@ -111,9 +111,9 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  let formula = x1 * x2 + y1 * y2;
-  let sqrt1 = Math.sqrt(x1 * x1 + y1 * y1);
-  let sqrt2 = Math.sqrt(x2 * x2 + y2 * y2);
+  const formula = x1 * x2 + y1 * y2;
+  const sqrt1 = Math.sqrt(x1 * x1 + y1 * y1);
+  const sqrt2 = Math.sqrt(x2 * x2 + y2 * y2);
 
   return Math.acos(formula / (sqrt1 * sqrt2));
 }
@@ -131,7 +131,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  return +value.toString().at(-1)
+  return +value.toString().at(-1);
 }
 
 
@@ -147,8 +147,8 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-  return +value
-} parseNumberFromString('-525.5')
+  return +value;
+}
 
 /**
  * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
@@ -164,8 +164,8 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-  return Math.sqrt(a * a + b * b + c * c)
-} 
+  return Math.sqrt(a * a + b * b + c * c);
+}
 
 
 /**
@@ -186,14 +186,15 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  if (pow === 0) return num
-  let power = '10'
-  for (let i=0; i<pow; i++) {
-    power += 0
+  if (pow === 0) return num;
+  let power = '10';
+  for (let i = 0; i < pow; i += 1) {
+    power += 0;
   }
-  num = num* (1 / power)
-  return num.toFixed(1) * power
-}  
+  let result = num;
+  result *= (1 / power);
+  return result.toFixed(1) * power;
+}
 
 /**
  * Returns true is the number is prime; otherwise false.
@@ -213,16 +214,16 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  if (n <= 1 || n % 2 === 0) return false;
+  if (n <= 1) return false;
   if (n === 2) return true;
-  let sqrt = Math.sqrt(n)
-  for (let i=3; i<=sqrt; i++) {
-    if (num % i === 0 ){
-      return false
+  if (n % 2 === 0) return false;
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
+    if (n % i === 0) {
+      return false;
     }
   }
-  return true
-} 
+  return true;
+}
 
 /**
  * Tries to convert value to number and returns it if conversion was successful;
@@ -240,8 +241,9 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  return Object.prototype.toString.call(+value) === '[object Number]' ? + value : def
-} toNumber(new Number(42), 0)
+  const num = Number(value);
+  return Number.isNaN(num) ? def : num;
+}
 
 module.exports = {
   getRectangleArea,

@@ -28,17 +28,17 @@
  *
  */
 function getFizzBuzz(num) {
-  let result = ''
+  let result = '';
   if (num % 3 === 0) {
-    result += 'Fizz'
+    result += 'Fizz';
   }
   if (num % 5 === 0) {
-    result += 'Buzz'
+    result += 'Buzz';
   }
-  if (num % 3 !== 0 && num % 5 !== 0) {
-    result += 'Buzz'
+  if (result === '') {
+    return num;
   }
-  return result
+  return result;
 }
 
 
@@ -54,11 +54,11 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-  let result = n
-  for (let i=n; i>1;) {
-    result = result * (--i)
+  let result = n;
+  for (let i = n; i > 1; i) {
+    result *= (i - 1);
   }
-  return result
+  return result;
 }
 
 
@@ -75,12 +75,12 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-  let result = n2
-  for (let i=n2; i>n1;) {
-    result += --i
+  let result = n2;
+  for (let i = n2; i > n1; i) {
+    result += i - 1;
   }
-  return result
-}  getSumBetweenNumbers(5,10)
+  return result;
+}
 
 
 /**
@@ -99,11 +99,11 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-  let first = a + b;
-  let second = a + c;
-  let third = b + c;
-  if (first > c && second > b && third > a) return true
-  return false
+  const first = a + b;
+  const second = a + c;
+  const third = b + c;
+  if (first > c && second > b && third > a) return true;
+  return false;
 }
 
 
@@ -118,10 +118,10 @@ function isTriangle(a, b, c) {
  *  }
  *
  *  (5;5)
- *     -------------
+ *      -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
  *     |           |
  *     |           |  height = 10
- *     -------------
+ *      -= 1 -= 1 -= 1 -= 1 -= 1 -= 1-
  *        width=20
  *
  * NOTE: Please use canvas coordinate space (https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes#The_grid),
@@ -140,15 +140,14 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  let difLeft = Math.abs(rect1.left - rect2.left);
-  let difTop = Math.abs(rect1.top - rect2.top);
-  let minWidth = Math.min(rect1.width, rect2.width); 
-  let minHeight = Math.min(rect1.height, rect2.height);
+  const difLeft = Math.abs(rect1.left - rect2.left);
+  const difTop = Math.abs(rect1.top - rect2.top);
+  const minWidth = Math.min(rect1.width, rect2.width);
+  const minHeight = Math.min(rect1.height, rect2.height);
 
-  if (difLeft < minWidth && difTop < minHeight) return true
-  return false
-
-} 
+  if (difLeft < minWidth && difTop < minHeight) return true;
+  return false;
+}
 
 
 /**
@@ -178,11 +177,18 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle(circle, point) {
-  let coordDiamX = [circle.center.x - circle.radius, circle.center.x + circle.radius];
-  let coordDiamY = [circle.center.y - circle.radius, circle.center.y + circle.radius];
+  const coordDiamX = [circle.center.x - circle.radius, circle.center.x + circle.radius];
+  const coordDiamY = [circle.center.y - circle.radius, circle.center.y + circle.radius];
 
-  if (point.x > coordDiamX[0] && point.x < coordDiamX[1] && point.y > coordDiamY[0] && point.y < coordDiamY[1]) return true
-  return false
+  if (
+    point.x > coordDiamX[0]
+    && point.x < coordDiamX[1]
+    && point.y > coordDiamY[0]
+    && point.y < coordDiamY[1]
+  ) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -198,18 +204,18 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-  let leng = str.length
+  let newStr = str;
+  let leng = str.length;
   let nowLetter;
   do {
-    if (str.length === 0) return null
-    nowLetter = str[0]
-    leng = str.length
-    let letter = new RegExp(str[0], 'g');
-    str = str.replace(letter,'');
-  } while (str.length+1 !== leng)
-  return nowLetter
-} 
-
+    if (newStr.length === 0) return null;
+    [nowLetter] = newStr;
+    leng = newStr.length;
+    const letter = new RegExp(nowLetter, 'g');
+    newStr = newStr.replace(letter, '');
+  } while (newStr.length + 1 !== leng);
+  return nowLetter;
+}
 
 /**
  * Returns the string representation of math interval,
@@ -234,18 +240,13 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-  let maxN = Math.max(a,b)
-  let minN = Math.min(a,b)
+  const maxN = Math.max(a, b);
+  const minN = Math.min(a, b);
   function flags(flag) {
-    if (flag) {
-      return '[]' 
-    } else {
-      return '()'
-    }
+    return flag ? '[]' : '()';
   }
-  return flags(isStartIncluded)[0] + minN + ', ' + maxN + flags(isEndIncluded)[1]
-} 
-
+  return `${flags(isStartIncluded)[0]}${minN}, ${maxN}${flags(isEndIncluded)[1]}`;
+}
 
 /**
  * Reverse the specified string (put all chars in reverse order)
@@ -260,7 +261,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-  return  str.split(' ').map(item => item.split('').reverse().join('')).reverse().join(' ')
+  return str.split(' ').map((item) => item.split('').reverse().join('')).reverse().join(' ');
 }
 
 
@@ -277,7 +278,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-  return +num.toString().split('').reverse().join('')
+  return +num.toString().split('').reverse().join('');
 }
 
 
@@ -303,10 +304,10 @@ function reverseInteger(num) {
  */
 function isCreditCardNumber(ccn) {
   const number = ccn.toString();
-  const digits = number.replace(/\D/g, "").split("").map(Number);
+  const digits = number.replace(/\D/g, '').split('').map(Number);
   let sum = 0;
   let isSecond = false;
-  for (let i = digits.length - 1; i >= 0; i--) {
+  for (let i = digits.length - 1; i >= 0; i -= 1) {
     let digit = digits[i];
     if (isSecond) {
       digit *= 2;
@@ -318,7 +319,7 @@ function isCreditCardNumber(ccn) {
     isSecond = !isSecond;
   }
   return sum % 10 === 0;
-} 
+}
 
 /**
  * Returns the digital root of integer:
@@ -335,8 +336,8 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  let sum = num.toString().split('').reduce((acc, item) => acc + +item,0)
-  return sum.toString().split('').reduce((acc, item) => acc + +item,0)
+  const sum = num.toString().split('').reduce((acc, item) => acc + +item, 0);
+  return sum.toString().split('').reduce((acc, item) => acc + +item, 0);
 }
 
 
@@ -362,24 +363,18 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-  const brackets = ['[]','{}','()','<>'];
-  let arr = str.split('');
-  for (let i=0; i<arr.length; i++) {
-    for (let j=0; j< brackets.length; j++) {
-      if (arr[i] == brackets[j][0] && arr[i+1] == brackets[j][1] ) {
-        arr.splice(i,2);
-        i--
-        i--
+  const brackets = ['[]', '{}', '()', '<>'];
+  const arr = str.split('');
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j < brackets.length; j += 1) {
+      if (arr[i] === brackets[j][0] && arr[i + 1] === brackets[j][1]) {
+        arr.splice(i, 2);
+        i -= 1;
+        i -= 1;
       }
     }
   }
-  console.log(arr)
-  if (arr.length > 0) {
-    return false
-  } else {
-    return true
-  }
-
+  return arr.length === 0;
 }
 
 
@@ -404,7 +399,7 @@ function isBracketsBalanced(str) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-  return num.toString(n)
+  return num.toString(n);
 }
 
 
@@ -421,21 +416,23 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  let arrPathes = pathes.map(item => item.split('/'))
-  let lengths = arrPathes.map(item => item.length).sort((a,b) => a-b)
-  let minPath = arrPathes.findIndex(item => item.length === lengths[0])
+  if (!pathes || pathes.length === 0) {
+    return '';
+  }
 
-  for (let i=0; i<arrPathes[minPath].length; i++) {
-    for (let j=1; j<arrPathes.length; j++) {
-      if (arrPathes[minPath][i] !== arrPathes[j][i]) {
-        if (i+1 === arrPathes[minPath].length) {
-          return arrPathes[minPath].slice(0,i).join('/') + '/'
-        } else {
-          return arrPathes[minPath].slice(0,i).join('/')
-        }
-      }
+  const splitPaths = pathes.map((path) => path.split('/'));
+  const commonPath = [];
+
+  for (let i = 0; i < splitPaths[0].length; i += 1) {
+    const segment = splitPaths[0][i];
+    if (splitPaths.every((path) => path[i] === segment)) {
+      commonPath.push(segment);
+    } else {
+      break;
     }
   }
+
+  return commonPath.length > 0 ? `${commonPath.join('/')}/` : '';
 }
 
 
@@ -466,26 +463,26 @@ function getMatrixProduct(m1, m2) {
 
   // Check if the matrices can be multiplied
   if (colsA !== rowsB) {
-    throw new Error("Matrices cannot be multiplied");
+    throw new Error('Matrices cannot be multiplied');
   }
 
   // Create the result matrix filled with zeros
   const result = new Array(rowsA);
-  for (let i = 0; i < rowsA; i++) {
+  for (let i = 0; i < rowsA; i += 1) {
     result[i] = new Array(colsB).fill(0);
   }
 
   // Perform the matrix multiplication
-  for (let i = 0; i < rowsA; i++) {
-    for (let j = 0; j < colsB; j++) {
-      for (let k = 0; k < colsA; k++) {
+  for (let i = 0; i < rowsA; i += 1) {
+    for (let j = 0; j < colsB; j += 1) {
+      for (let k = 0; k < colsA; k += 1) {
         result[i][j] += m1[i][k] * m2[k][j];
       }
     }
   }
 
   return result;
-} 
+}
 
 
 /**
@@ -521,15 +518,16 @@ function getMatrixProduct(m1, m2) {
 function evaluateTicTacToePosition(position) {
   const value = 'X0';
   function includeValue(pos, val) {
-    for (let i=0; i<val.length; i++) {
-      if (pos[0][0] === val[i] && pos[1][1] === val[i] && pos[2][2] === val[i]) return pos[1][1]
-      if (pos[0][2] === val[i] && pos[1][1] === val[i] && pos[2][0] === val[i]) return pos[0][2]
-      if (pos[0][0] === val[i] && pos[1][0] === val[i] && pos[2][0] === val[i]) return pos[0][0]
-      if (pos[0][1] === val[i] && pos[1][1] === val[i] && pos[2][1] === val[i]) return pos[0][1]
-      if (pos[0][2] === val[i] && pos[1][2] === val[i] && pos[2][2] === val[i]) return pos[0][2]
+    for (let i = 0; i < val.length; i += 1) {
+      if (pos[0][0] === val[i] && pos[1][1] === val[i] && pos[2][2] === val[i]) return pos[1][1];
+      if (pos[0][2] === val[i] && pos[1][1] === val[i] && pos[2][0] === val[i]) return pos[0][2];
+      if (pos[0][0] === val[i] && pos[1][0] === val[i] && pos[2][0] === val[i]) return pos[0][0];
+      if (pos[0][1] === val[i] && pos[1][1] === val[i] && pos[2][1] === val[i]) return pos[0][1];
+      if (pos[0][2] === val[i] && pos[1][2] === val[i] && pos[2][2] === val[i]) return pos[0][2];
     }
+    return undefined;
   }
-   return includeValue(position, value)
+  return includeValue(position, value);
 }
 
 
